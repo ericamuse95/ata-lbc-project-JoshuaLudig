@@ -46,4 +46,8 @@ public class ExampleRecord {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public short getSongId() {
+        return 0;
+    }
 }
