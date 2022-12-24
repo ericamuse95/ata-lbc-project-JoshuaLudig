@@ -14,8 +14,9 @@
 
 # Fill out the following values
 # The path of your repo on github. Don't include the whole URL, just the part after github.com/KenzieAcademy-SoftwareEngineering/
-export LBC_GROUP_NAME=replacethiswithyourgroupname
-export LBC_REPO_NAME=ata-lbc-project-$GITHUB_USERNAME
+export LBC_GROUP_NAME=musicapp
+export LBC_REPO_NAME=ata-lbc-project_joshualudig.git
+export GITHUB_TOKEN='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'
 
 # Do not modify the rest of these unless you have been instructed to do so.
 export LBC_PROJECT_NAME=lbcproject
