@@ -37,4 +37,10 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
             // THEN
             Assertions.assertEquals(record, newMusicFeaturesService.findByFeatureId(id), "The id matches");
         }
+
+    private class NewMusicFeaturesRepository {
+        public Object findByfeatureId(String id) {
+            return newMusicFeaturesRepository.findByfeatureId(id);
+        }
     }
+}
