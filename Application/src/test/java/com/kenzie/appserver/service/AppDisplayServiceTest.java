@@ -2,12 +2,10 @@ package com.kenzie.appserver.service;
 
 import com.kenzie.appserver.repositories.ExampleRepository;
 import com.kenzie.appserver.repositories.model.ExampleRecord;
-import com.kenzie.appserver.service.model.AppDisplay;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.validation.constraints.AssertTrue;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
@@ -18,6 +16,8 @@ import static org.mockito.Mockito.when;
 public class AppDisplayServiceTest<AppDisplay> {
     private ExampleRepository exampleRepository;
     private AppDisplayService appDisplayService;
+    private Object SongId;
+    private AppDisplay ArtistByUserId;
 
     public <AppDisplayService> AppDisplayServiceTest(ExampleRepository exampleRepository,
                                                      AppDisplayService appDisplayService) {
@@ -46,21 +46,31 @@ public class AppDisplayServiceTest<AppDisplay> {
 
         // WHEN
         when(exampleRepository.findBySongId(id)).thenReturn(Optional.of(record));
-        AppDisplay appDisplay = (AppDisplay) appDisplayService.findById(id);
+        AppDisplay appDisplay = (AppDisplay) appDisplayService.findBySongId(id);
 
         // THEN
         Assertions.assertTrue((BooleanSupplier) appDisplay, "The object is returned");
-        Assertions.assertEquals(record.getSongId(), appDisplay.getSongId(), "The song id matches");
-        Assertions.assertEquals(record.getName(), appDisplay.getName(), "The name matches");
+        Assertions.assertEquals(record.getSongId(), appDisplay.toString(), "The song id matches");
+        Assertions.assertEquals(record.getName(), appDisplay.toString(), "The name matches");
     }
 
     private class AppDisplayService {
+        private AppDisplay ArtistByGenre;
+
         public AppDisplayService() {
 
         }
 
         public AppDisplay findArtistsByUserId(String id) {
-            return ArtistsByUserId;
+            return ArtistByUserId;
+        }
+
+        public Object findBySongId(String id) {
+            return SongId;
+        }
+
+        public AppDisplay findArtistsByGenre(String id) {
+            return ArtistByGenre;
         }
     }
     // I will add a test to locate Artists by their User Ids
