@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body class="background">
+<header class="header" id="header">
+    <div class="site-title">
+        <a class="header_home" href="index.html">music app</a>
+    </div>
+    <div>
+        <a href="index.html">Go to Index Page</a>
+    </div>
+</header>
+<div class="card">
+    <h2>Create Comment</h2>
+    <form class="card-content" id="create-comment-form">
+        <p class="form-field">
+            <label>Artist</label>
+            <input type="text" required class="validated-field" id="create-comment-Artist">
+            <label>SongId</label>
+            <input type="text" required class="validated-field" id="create-comment-SongId">
+            <label>Genre</label>
+            <input type="text" required class="validated-field" id="create-comment-Genre">
+            <label>Year</label>
+            <input type="text" required class="validated-field" id="create-comment-Year">
+        </p>
+        <button type="submit">Create</button>
+    </form>
+</div>
+<div class="card" id="result">
+    <h2>Result:</h2>
+    <p id="result-info"></p>
+</div>
+</body>
+</html>
