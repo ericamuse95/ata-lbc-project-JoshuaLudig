@@ -11,7 +11,7 @@ public class AppDisplayService<AppDisplayRepository> {
     private AppDisplayService appDisplayService;
     private AppDisplayService ArtistByUserId;
     private Object SongId;
-    private AppDisolayService ArtistByGenre;
+    private AppDisplayService ArtistByGenre;
     private AppDisplayService ArtistByYear;
 
     public AppDisplayService() {
@@ -34,7 +34,7 @@ public class AppDisplayService<AppDisplayRepository> {
         appDisplayRepository.equals(appDisplayService);
         return appDisplayService;
     }
-    public AppDisolayService getArtistByGenre() {
+    public AppDisplayService getArtistByGenre() {
         return ArtistByGenre;
     }
     public AppDisplayService getArtistByUserId() {
@@ -48,7 +48,5 @@ public class AppDisplayService<AppDisplayRepository> {
         return SongId;
     }
 
-    private class AppDisolayService {
-    }
 }
 
