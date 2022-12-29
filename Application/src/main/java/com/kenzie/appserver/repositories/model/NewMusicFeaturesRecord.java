@@ -8,6 +8,8 @@ public class NewMusicFeaturesRecord {
     private String featureDescription;
     private String featureImage;
     private String featureLink;
+    private String songId;
+
 
     public String getFeatureId() {
         return featureId;
@@ -15,6 +17,14 @@ public class NewMusicFeaturesRecord {
 
     public void setFeatureId(String featureId) {
         this.featureId = featureId;
+    }
+
+    public String getSongId() {
+        return songId;
+    }
+
+    public void setSongId(String songId) {
+        this.songId = songId;
     }
 
     public String getFeatureName() {
