@@ -9,7 +9,7 @@ import java.util.Optional;
 public class NewMusicFeaturesService {
 
     private NewMusicFeaturesRepository newMusicFeaturesRepository;
-    private NewMusicFeatures SongById;
+    private NewMusicFeatures SongId;
 
     public NewMusicFeaturesService(NewMusicFeaturesRepository newMusicFeaturesRepository) {
         this.newMusicFeaturesRepository = newMusicFeaturesRepository;
@@ -40,7 +40,7 @@ public class NewMusicFeaturesService {
                 })
                 .orElse(null);
 
-        return SongById;
+        return SongId;
     }
 
     public NewMusicFeatures addNewNewMusicFeatures(NewMusicFeatures newMusicFeatures) {

@@ -4,18 +4,18 @@ import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.springframework.data.repository.CrudRepository;
 
 @EnableScan
-public interface DisplayRepository extends CrudRepository<DisplayRecord, String> {
+public interface AppDisplayRepository extends CrudRepository<AppDisplayRecord, String> {
 
     static Object findBySongId(String id) {
-        return null;
+        return id;
     }
 
     static Object findArtistsByUserId(String id) {
-        return null;
+        return id;
     }
 
     static Object findArtistsByGenre(String id) {
-        return null;
+        return id;
     }
 
     static Object findArtistsByYear(String id) {
