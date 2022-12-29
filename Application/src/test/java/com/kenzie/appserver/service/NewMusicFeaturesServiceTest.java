@@ -26,21 +26,38 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
         newMusicFeaturesRepository = mock(NewMusicFeaturesRepository.class);
         newMusicFeaturesService = new NewMusicFeaturesService(newMusicFeaturesRepository);
     }
-    @Test
-        void findByFeatureId ( ) {
-            // GIVEN
-            String id = randomUUID().toString();
 
-            // WHEN
-            Object record = new Object();
-            when(newMusicFeaturesRepository.findByfeatureId(id)).thenReturn(Optional.of(record));
-            // THEN
-            Assertions.assertEquals(record, newMusicFeaturesService.findByFeatureId(id), "The id matches");
-        }
+    @Test
+    void findByFeatureId() {
+        // GIVEN
+        String id = randomUUID().toString();
+
+        // WHEN
+        Object record = new Object();
+        when(newMusicFeaturesRepository.findByfeatureId(id)).thenReturn(Optional.of(record));
+        // THEN
+        Assertions.assertEquals(record, newMusicFeaturesService.findByFeatureId(id), "The id matches");
+    }
+
+    @Test
+    void findBySongId() {
+        // GIVEN
+        String id = randomUUID().toString();
+
+        // WHEN
+        Object record = new Object();
+        when(newMusicFeaturesRepository.findBySongId(id)).thenReturn(Optional.of(record));
+        // THEN
+        Assertions.assertEquals(record, newMusicFeaturesService.findBySongId(id), "The id matches");
+    }
 
     private class NewMusicFeaturesRepository {
         public Object findByfeatureId(String id) {
             return newMusicFeaturesRepository.findByfeatureId(id);
+        }
+
+        public Object findBySongId(String id) {
+            return newMusicFeaturesRepository.findBySongId(id);
         }
     }
 }
