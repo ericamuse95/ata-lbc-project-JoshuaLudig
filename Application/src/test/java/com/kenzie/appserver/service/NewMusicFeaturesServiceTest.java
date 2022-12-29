@@ -1,5 +1,7 @@
 package com.kenzie.appserver.service;
 
+import com.kenzie.appserver.repositories.model.NewMusicFeaturesRecord;
+import com.kenzie.appserver.repositories.model.NewMusicFeaturesRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +36,7 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
 
         // WHEN
         Object record = new Object();
-        when(newMusicFeaturesRepository.findByfeatureId(id)).thenReturn(Optional.of(record));
+        when(newMusicFeaturesRepository.findByfeatureId(id)).thenReturn(Optional.<NewMusicFeaturesRecord>of((NewMusicFeaturesRecord) record));
         // THEN
         Assertions.assertEquals(record, newMusicFeaturesService.findByFeatureId(id), "The id matches");
     }
@@ -46,18 +48,9 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
 
         // WHEN
         Object record = new Object();
-        when(newMusicFeaturesRepository.findBySongId(id)).thenReturn(Optional.of(record));
+        when(newMusicFeaturesRepository.findBySongId(id)).thenReturn(Optional.<NewMusicFeaturesRecord>of((NewMusicFeaturesRecord) record));
         // THEN
         Assertions.assertEquals(record, newMusicFeaturesService.findBySongId(id), "The id matches");
     }
-
-    private class NewMusicFeaturesRepository {
-        public Object findByfeatureId(String id) {
-            return newMusicFeaturesRepository.findByfeatureId(id);
-        }
-
-        public Object findBySongId(String id) {
-            return newMusicFeaturesRepository.findBySongId(id);
-        }
-    }
 }
+

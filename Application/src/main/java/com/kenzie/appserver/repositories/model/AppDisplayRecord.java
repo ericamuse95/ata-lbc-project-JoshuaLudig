@@ -1,6 +1,6 @@
 package com.kenzie.appserver.repositories.model;
 
-public class DisplayRecord {
+public class AppDisplayRecord {
     private String SongId;
     private String ArtistByUserId;
     private String ArtistByGenre;
