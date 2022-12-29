@@ -27,9 +27,8 @@ public class SongDownloadController {
 
     @GetMapping("/{songId}")
     public ResponseEntity<GetSongDownloadResponse> get(@PathVariable("songId") String songId) {
-    //maybe a findBySongID method in NewMusicFeatureService
-        SongInfo song  = newMusicFeaturesService.findBySongId(songId);
 
+        SongInfo song  = (SongInfo) newMusicFeaturesService.findBySongId(songId);
 
         if (song == null) {
             return ResponseEntity.notFound().build();
