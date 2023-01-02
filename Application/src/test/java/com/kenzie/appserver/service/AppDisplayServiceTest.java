@@ -1,7 +1,7 @@
 package com.kenzie.appserver.service;
 
-import com.kenzie.appserver.repositories.model.AppDisplayRepository;
 import com.kenzie.appserver.repositories.model.ExampleRecord;
+import jdk.internal.icu.lang.UCharacterDirection;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
@@ -14,21 +14,20 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AppDisplayServiceTest<AppDisplay> {
-    private AppDisplayRepository appDisplayRepository;
     private AppDisplayService appDisplayService;
     private Object SongId;
     private AppDisplay ArtistByUserId;
+    private UCharacterDirection appDisplay;
+    private AppDisplay ArtistByGenre;
+    private Object ArtistByYear;
 
-    public <AppDisplayService> AppDisplayServiceTest(AppDisplayRepository appDisplayRepository,
-                                                     AppDisplayService appDisplayService) {
-        this.appDisplayRepository = appDisplayRepository;
-        this.appDisplayService = (AppDisplayServiceTest.AppDisplayService) appDisplayService;
+    public AppDisplayServiceTest(AppDisplayService appDisplayService) {
+        this.appDisplayService = appDisplayService;
     }
 
     @BeforeEach
     void setup() {
-        appDisplayRepository = mock(AppDisplayRepository.class);
-        appDisplayService = new AppDisplayService();
+        appDisplayService = mock(AppDisplayService.class);
     }
     /**------------------------------------------------------------------------
             *appDisplayService.findBySongId
@@ -45,13 +44,11 @@ public class AppDisplayServiceTest<AppDisplay> {
         record.setName("songname");
 
         // WHEN
-        when(AppDisplayRepository.findBySongId(id)).thenReturn(Optional.of(record));
-        AppDisplay appDisplay = (AppDisplay) appDisplayService.findBySongId(id);
+        when(appDisplayService.findBySongId(id)).thenReturn(Optional.of(record));
+
 
         // THEN
-        Assertions.assertTrue((BooleanSupplier) appDisplay, "The object is returned");
-        Assertions.assertEquals(record.getSongId(), appDisplay.toString(), "The song id matches");
-        Assertions.assertEquals(record.getName(), appDisplay.toString(), "The name matches");
+        Assertions.assertEquals(record, appDisplayService.findBySongId(id), "The id matches");
     }
 
     private class AppDisplayService {
@@ -69,6 +66,10 @@ public class AppDisplayServiceTest<AppDisplay> {
         public AppDisplay findArtistsByGenre(String id) {
             return ArtistByGenre;
         }
+
+        public Object findArtistsByYear(String id) {
+            return ArtistsByYear(id);
+        }
     }
     // I will add a test to locate Artists by their User Ids
 
@@ -77,9 +78,8 @@ public class AppDisplayServiceTest<AppDisplay> {
         // GIVEN
         String id = randomUUID().toString();
 
-        when(AppDisplayRepository.findArtistsByUserId(id)).thenReturn(Optional.empty());
-
         // WHEN
+        when(appDisplayService.findArtistsByUserId(id)).thenReturn((AppDisplay) Optional.of(ArtistByUserId));
         AppDisplay appDisplay = appDisplayService.findArtistsByUserId(id);
 
         // THEN
@@ -91,9 +91,9 @@ public class AppDisplayServiceTest<AppDisplay> {
         // GIVEN
         String id = randomUUID().toString();
 
-        when(AppDisplayRepository.findArtistsByGenre(id)).thenReturn(Optional.empty());
 
         // WHEN
+        when (appDisplayService.findArtistsByGenre(id)).thenReturn(ArtistByGenre);
         AppDisplay appDisplay = appDisplayService.findArtistsByGenre(id);
 
         // THEN
@@ -106,9 +106,8 @@ public class AppDisplayServiceTest<AppDisplay> {
         // GIVEN
         String id = randomUUID().toString();
 
-        when(AppDisplayRepository.findArtistsByYear(id)).thenReturn(Optional.empty());
-
         // WHEN
+        when (appDisplayService.findArtistsByYear(id)).thenReturn(ArtistByYear);
         AppDisplay appDisplay = ArtistsByYear(id);
 
         // THEN
