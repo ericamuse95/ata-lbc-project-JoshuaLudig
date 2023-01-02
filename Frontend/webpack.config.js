@@ -8,7 +8,7 @@ module.exports = {
     usedExports: true
   },
   entry: {
-    examplePage: path.resolve(__dirname, 'src', 'pages', 'examplePage.js'),
+    contentPage: path.resolve(__dirname, 'src', 'pages', 'contentPage.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -27,8 +27,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: 'index.html',
+      template: './src/content.html',
+      filename: 'content.html',
       inject: false
     }),
     new CopyPlugin({

@@ -4,7 +4,7 @@ import com.kenzie.appserver.repositories.model.NewMusicFeaturesRecord;
 import com.kenzie.appserver.repositories.model.NewMusicFeaturesRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.Optional;
 

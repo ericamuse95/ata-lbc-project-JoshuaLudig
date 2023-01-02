@@ -19,6 +19,6 @@ public interface AppDisplayRepository extends CrudRepository<AppDisplayRecord, S
     }
 
     static Object findArtistsByYear(String id) {
-        return null;
+        return id;
     }
 }
