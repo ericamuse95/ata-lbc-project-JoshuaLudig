@@ -11,31 +11,11 @@ export default class ContentClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['ArtistLoaded', 'getContent', 'createContent'];
+        const methodsToBind = ['ArtistLoaded', 'SongIdLoaded', 'GenreLoaded', 'YearLoaded', 'getContent', 'createContent'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);
     }
-    constructor(props = {}){
-            super();
-            const methodsToBind = ['SongIdLoaded', 'getContent', 'createContent'];
-            this.bindClassMethods(methodsToBind, this);
-            this.props = props;
-            this.clientLoaded(axios);
-
-           constructor(props = {}){
-             super();
-             const methodsToBind = ['GenreLoaded', 'getContent', 'createContent'];
-             this.bindClassMethods(methodsToBind, this);
-             this.props = props;
-             this.clientLoaded(axios);
-
-             constructor(props = {}){
-             super();
-             const methodsToBind = ['YearLoaded', 'getContent', 'createContent'];
-             this.bindClassMethods(methodsToBind, this);
-             this.props = props;
-             this.clientLoaded(axios);
 
     /**
      * Run any data that are supposed to be called once the client has loaded successfully.
@@ -73,7 +53,7 @@ export default class ContentClient extends BaseClass {
         }
         async getAllContent(errorCallback) {
           try{
-          const response = await this.client.get(/content/all);
+          const response = await this.client.get("/content/all");
           return response.data;
           }catch (error) {
           this.handleError("getAllContent",error,errorCallback)
