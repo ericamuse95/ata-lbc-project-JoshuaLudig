@@ -1,41 +1,41 @@
 package com.kenzie.appserver.repositories.model;
 
 public class AppDisplayRecord {
-    private String SongId;
-    private String ArtistByUserId;
-    private String ArtistByGenre;
-    private String ArtistByYear;
+    private String songId;
+    private String artistByUserId;
+    private String artistByGenre;
+    private String artistByYear;
 
     public String getSongId() {
-        return SongId;
+        return songId;
     }
 
     public void setSongId(String songId) {
-        SongId = songId;
+        this.songId = songId;
     }
 
     public String getArtistByUserId() {
-        return ArtistByUserId;
+        return artistByUserId;
     }
 
     public void setArtistByUserId(String artistByUserId) {
-        ArtistByUserId = artistByUserId;
+        this.artistByUserId = artistByUserId;
     }
 
     public String getArtistByGenre() {
-        return ArtistByGenre;
+        return artistByGenre;
     }
 
     public void setArtistByGenre(String artistByGenre) {
-        ArtistByGenre = artistByGenre;
+        this.artistByGenre = artistByGenre;
     }
 
     public String getArtistByYear() {
-        return ArtistByYear;
+        return artistByYear;
     }
 
     public void setArtistByYear(String artistByYear) {
-        ArtistByYear = artistByYear;
+        this.artistByYear = artistByYear;
     }
 
     @Override
