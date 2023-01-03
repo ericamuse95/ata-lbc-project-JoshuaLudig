@@ -2,9 +2,9 @@ package com.kenzie.appserver.service;
 
 import com.kenzie.appserver.repositories.model.NewMusicFeaturesRecord;
 import com.kenzie.appserver.repositories.model.NewMusicFeaturesRepository;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.Test;
 
 import java.util.Optional;
 
@@ -34,9 +34,10 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
         // GIVEN
         String id = randomUUID().toString();
 
+        NewMusicFeaturesRecord record = new NewMusicFeaturesRecord();
+
         // WHEN
-        Object record = new Object();
-        when(newMusicFeaturesRepository.findByfeatureId(id)).thenReturn(Optional.<NewMusicFeaturesRecord>of((NewMusicFeaturesRecord) record));
+        when(newMusicFeaturesRepository.findById(id)).thenReturn(Optional.of(record));
         // THEN
         Assertions.assertEquals(record, newMusicFeaturesService.findByFeatureId(id), "The id matches");
     }
@@ -47,10 +48,9 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
         String id = randomUUID().toString();
 
         // WHEN
-        Object record = new Object();
-        when(newMusicFeaturesRepository.findBySongId(id)).thenReturn(Optional.<NewMusicFeaturesRecord>of((NewMusicFeaturesRecord) record));
+        newMusicFeaturesRepository.findBySongId(id);
         // THEN
-        Assertions.assertEquals(record, newMusicFeaturesService.findBySongId(id), "The id matches");
+        Assertions.assertEquals(newMusicFeatures, newMusicFeaturesService.findBySongId(id), "The id matches");
     }
 }
 

@@ -1,10 +1,10 @@
 package com.kenzie.appserver.service;
 
-import com.kenzie.appserver.repositories.model.ExampleRecord;
+import com.kenzie.appserver.repositories.model.AppDisplayRecord;
 import jdk.internal.icu.lang.UCharacterDirection;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.Test;
 
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
@@ -39,9 +39,9 @@ public class AppDisplayServiceTest<AppDisplay> {
         // GIVEN
         String id = randomUUID().toString();
 
-        ExampleRecord record = new ExampleRecord();
-        record.setId(id);
-        record.setName("songname");
+        AppDisplayRecord record = new AppDisplayRecord();
+        record.setSongId(id);
+        record.setArtistByUserId("artistname");
 
         // WHEN
         when(appDisplayService.findBySongId(id)).thenReturn(Optional.of(record));
