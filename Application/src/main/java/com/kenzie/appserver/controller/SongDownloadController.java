@@ -11,26 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 
 @RestController
-@RequestMapping("song")
+@RequestMapping("/song")
 public class SongDownloadController {
 
     private NewMusicFeaturesService newMusicFeaturesService;
 
     SongDownloadController(NewMusicFeaturesService newMusicFeaturesService) {
         this.newMusicFeaturesService = newMusicFeaturesService;
-    }
-
-    @GetMapping("/{songId}")
-    public ResponseEntity<GetSongDownloadResponse> get(@PathVariable("songId") String songId) {
-
-        SongInfo song  = (SongInfo) newMusicFeaturesService.findBySongId(songId);
-
-        if (song == null) {
-            return ResponseEntity.notFound().build();
-        }
-        GetSongDownloadResponse response = createGetSongDownloadResponse(song);
-
-        return ResponseEntity.ok(response);
     }
 
     @PostMapping
@@ -43,6 +30,19 @@ public class SongDownloadController {
 
 
         return ResponseEntity.created(URI.create("/songId/" + songDownloadResponse.getSongId())).body(songDownloadResponse);
+    }
+
+    @GetMapping("/{songId}")
+    public ResponseEntity<GetSongDownloadResponse> getSongById(@PathVariable("songId") String songId) {
+
+        SongInfo song  = (SongInfo) newMusicFeaturesService.findBySongId(songId);
+
+        if (song == null) {
+            return ResponseEntity.notFound().build();
+        }
+        GetSongDownloadResponse response = createGetSongDownloadResponse(song);
+
+        return ResponseEntity.ok(response);
     }
 
 

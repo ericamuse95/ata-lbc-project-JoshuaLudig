@@ -64,7 +64,12 @@ public class NewMusicFeaturesRecord {
         if (this == o) return true;
         if (!( o instanceof NewMusicFeaturesRecord )) return false;
         NewMusicFeaturesRecord that = (NewMusicFeaturesRecord) o;
-        return Objects.equals(getFeatureId(), that.getFeatureId()) && Objects.equals(getFeatureName(), that.getFeatureName()) && Objects.equals(getFeatureDescription(), that.getFeatureDescription()) && Objects.equals(getFeatureImage(), that.getFeatureImage()) && Objects.equals(getFeatureLink(), that.getFeatureLink());
+        return Objects.equals(getFeatureId(),
+                that.getFeatureId()) && Objects.equals(getFeatureName(),
+                that.getFeatureName()) && Objects.equals(getFeatureDescription(),
+                that.getFeatureDescription()) && Objects.equals(getFeatureImage(),
+                that.getFeatureImage()) && Objects.equals(getFeatureLink(),
+                that.getFeatureLink());
     }
 
     @Override
