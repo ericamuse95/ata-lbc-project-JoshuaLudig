@@ -55,7 +55,7 @@ public class NewMusicFeaturesService {
         return SongId(id);
     }
 
-    private class NewMusicFeatures {
+    class NewMusicFeatures {
         private Object NewMusicFeatures;
 
         public Object getFeatureId() {

@@ -2,9 +2,9 @@ package com.kenzie.appserver.service;
 
 import com.kenzie.appserver.repositories.model.NewMusicFeaturesRecord;
 import com.kenzie.appserver.repositories.model.NewMusicFeaturesRepository;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
@@ -17,17 +17,18 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
     private NewMusicFeaturesService newMusicFeaturesService;
     private boolean newMusicFeatures;
 
-    public NewMusicFeaturesServiceTest(NewMusicFeaturesRepository newMusicFeaturesRepository,
-                                       NewMusicFeaturesService newMusicFeaturesService) {
-        this.newMusicFeaturesRepository = newMusicFeaturesRepository;
-        this.newMusicFeaturesService = newMusicFeaturesService;
-    }
+//    public NewMusicFeaturesServiceTest(NewMusicFeaturesRepository newMusicFeaturesRepository,
+//                                       NewMusicFeaturesService newMusicFeaturesService) {
+//        this.newMusicFeaturesRepository = newMusicFeaturesRepository;
+//        this.newMusicFeaturesService = newMusicFeaturesService;
+//    }
 
     @BeforeEach
     void setup() {
         newMusicFeaturesRepository = mock(NewMusicFeaturesRepository.class);
         newMusicFeaturesService = new NewMusicFeaturesService(newMusicFeaturesRepository);
     }
+
 
     @Test
     void findByFeatureId() {
@@ -39,7 +40,10 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
         // WHEN
         when(newMusicFeaturesRepository.findById(id)).thenReturn(Optional.of(record));
         // THEN
-        Assertions.assertEquals(record, newMusicFeaturesService.findByFeatureId(id), "The id matches");
+       AssertEquals (newMusicFeaturesService.findByFeatureId(id), record);
+    }
+
+    private void AssertEquals(NewMusicFeaturesService.NewMusicFeatures byFeatureId, NewMusicFeaturesRecord record) {
     }
 
     @Test
