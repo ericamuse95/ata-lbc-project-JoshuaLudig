@@ -9,16 +9,29 @@ import org.springframework.stereotype.Service;
 public class AppDisplayService<AppDisplayRepository> {
 
     private AppDisplayRepository appDisplayRepository;
-    private Object SongId;
+    private String SongId;
     private com.kenzie.appserver.service.model.SongInfo SongInfo;
+    private AppDisplayService appDisplayService;
 
-    public AppDisplayService(AppDisplayRepository appDisplayRepository) {
+    public AppDisplayService(AppDisplayRepository appDisplayRepository, String songId, com.kenzie.appserver.service.model.SongInfo songInfo) {
         this.appDisplayRepository = appDisplayRepository;
+        SongId = songId;
+        SongInfo = songInfo;
     }
 
+    /**
+     * @param appDisplayService
+     * @return
+     */
     public AppDisplayService addNewAppDisplayService(AppDisplayService appDisplayService) {
+        this.appDisplayService = appDisplayService;
         return appDisplayService;
     }
+
+    /**
+     * @param id
+     * @return
+     */
     public SongInfo findBySongId(String id) {
         return SongInfo;
     }

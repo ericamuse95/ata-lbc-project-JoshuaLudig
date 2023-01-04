@@ -15,11 +15,11 @@ import static org.mockito.Mockito.when;
 
 public class AppDisplayServiceTest<AppDisplay> {
     private AppDisplayService appDisplayService;
-    private Object SongId;
+    private String SongId;
     private AppDisplay ArtistByUserId;
     private UCharacterDirection appDisplay;
     private AppDisplay ArtistByGenre;
-    private Object ArtistByYear;
+    private String ArtistByYear;
 
     public AppDisplayServiceTest(AppDisplayService appDisplayService) {
         this.appDisplayService = appDisplayService;
@@ -44,7 +44,7 @@ public class AppDisplayServiceTest<AppDisplay> {
         record.setArtistByUserId("artistname");
 
         // WHEN
-        when(appDisplayService.findBySongId(id)).thenReturn(Optional.of(record));
+        when(appDisplayService.findBySongId(id)).thenReturn(String.valueOf(Optional.of(record)));
 
 
         // THEN
@@ -54,12 +54,16 @@ public class AppDisplayServiceTest<AppDisplay> {
     private class AppDisplayService {
         private AppDisplay ArtistByGenre;
 
+        private AppDisplayService(AppDisplay artistByGenre) {
+            ArtistByGenre = artistByGenre;
+        }
+
 
         public AppDisplay findArtistsByUserId(String id) {
             return ArtistByUserId;
         }
 
-        public Object findBySongId(String id) {
+        public String findBySongId(String id) {
             return SongId;
         }
 
@@ -67,8 +71,8 @@ public class AppDisplayServiceTest<AppDisplay> {
             return ArtistByGenre;
         }
 
-        public Object findArtistsByYear(String id) {
-            return ArtistsByYear(id);
+        public String findArtistsByYear(String id) {
+            return (String) ArtistsByYear(id);
         }
     }
     // I will add a test to locate Artists by their User Ids

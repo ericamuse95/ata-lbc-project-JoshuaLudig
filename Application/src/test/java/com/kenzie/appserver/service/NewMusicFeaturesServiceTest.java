@@ -17,6 +17,8 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
     private NewMusicFeaturesService newMusicFeaturesService;
     private boolean newMusicFeatures;
     private NewMusicFeaturesService.NewMusicFeatures songId;
+    private NewMusicFeaturesService.NewMusicFeatures featureId;
+    private NewMusicFeaturesRecord record;
 
     public NewMusicFeaturesServiceTest() {
         this(false, null);
@@ -53,7 +55,9 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
        AssertEquals (newMusicFeaturesService.findByFeatureId(id), record);
     }
 
-    private void AssertEquals(NewMusicFeaturesService.NewMusicFeatures byFeatureId, NewMusicFeaturesRecord record) {
+    private void AssertEquals(NewMusicFeaturesService.NewMusicFeatures FeatureId, NewMusicFeaturesRecord record) {
+        featureId = FeatureId;
+        this.record = record;
     }
 
     @Test
