@@ -16,6 +16,16 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
     private NewMusicFeaturesRepository newMusicFeaturesRepository;
     private NewMusicFeaturesService newMusicFeaturesService;
     private boolean newMusicFeatures;
+    private NewMusicFeaturesService.NewMusicFeatures songId;
+
+    public NewMusicFeaturesServiceTest() {
+        this(false, null);
+    }
+
+    public NewMusicFeaturesServiceTest(boolean newMusicFeatures, NewMusicFeaturesService.NewMusicFeatures songId) {
+        this.newMusicFeatures = newMusicFeatures;
+        this.songId = songId;
+    }
 
 //    public NewMusicFeaturesServiceTest(NewMusicFeaturesRepository newMusicFeaturesRepository,
 //                                       NewMusicFeaturesService newMusicFeaturesService) {
@@ -26,7 +36,7 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
     @BeforeEach
     void setup() {
         newMusicFeaturesRepository = mock(NewMusicFeaturesRepository.class);
-        newMusicFeaturesService = new NewMusicFeaturesService(newMusicFeaturesRepository);
+        newMusicFeaturesService = new NewMusicFeaturesService(newMusicFeaturesRepository, songId);
     }
 
 
@@ -55,6 +65,17 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
         newMusicFeaturesRepository.findBySongId(id);
         // THEN
         Assertions.assertEquals(newMusicFeatures, newMusicFeaturesService.findBySongId(id), "The id matches");
+    }
+
+    @Test
+    void getNewMusicFeaturesRecord() {
+        // GIVEN
+        String id = randomUUID().toString();
+
+        // WHEN
+        newMusicFeaturesRepository.getNewMusicFeaturesRecord();
+        // THEN
+        Assertions.assertEquals(newMusicFeatures, newMusicFeaturesService.getNewMusicFeaturesRecord(), "The id matches");
     }
 }
 

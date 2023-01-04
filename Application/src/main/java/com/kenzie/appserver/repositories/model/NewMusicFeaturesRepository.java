@@ -7,5 +7,7 @@ import java.util.Optional;
 public interface NewMusicFeaturesRepository extends CrudRepository<NewMusicFeaturesRecord, String> {
     Optional<NewMusicFeaturesRecord> findByFeatureId(String id);
     Optional<NewMusicFeaturesRecord> findBySongId(String id);
+
+    void getNewMusicFeaturesRecord();
 }
 
