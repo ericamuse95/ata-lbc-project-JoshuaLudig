@@ -1,5 +1,8 @@
 package com.kenzie.appserver.repositories.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+
 import java.util.Objects;
 
 public class NewMusicFeaturesRecord {
@@ -10,7 +13,7 @@ public class NewMusicFeaturesRecord {
     private String featureLink;
     private String songId;
 
-
+    @DynamoDBAttribute(attributeName = "featureId")
     public String getFeatureId() {
         return featureId;
     }
@@ -18,7 +21,7 @@ public class NewMusicFeaturesRecord {
     public void setFeatureId(String featureId) {
         this.featureId = featureId;
     }
-
+    @DynamoDBHashKey(attributeName = "featureName")
     public String getSongId() {
         return songId;
     }
@@ -26,7 +29,7 @@ public class NewMusicFeaturesRecord {
     public void setSongId(String songId) {
         this.songId = songId;
     }
-
+    @DynamoDBAttribute(attributeName = "featureDescription")
     public String getFeatureName() {
         return featureName;
     }
@@ -34,7 +37,7 @@ public class NewMusicFeaturesRecord {
     public void setFeatureName(String featureName) {
         this.featureName = featureName;
     }
-
+    @DynamoDBAttribute(attributeName = "featureDescription")
     public String getFeatureDescription() {
         return featureDescription;
     }
@@ -42,7 +45,7 @@ public class NewMusicFeaturesRecord {
     public void setFeatureDescription(String featureDescription) {
         this.featureDescription = featureDescription;
     }
-
+    @DynamoDBAttribute(attributeName = "featureImage")
     public String getFeatureImage() {
         return featureImage;
     }
@@ -50,7 +53,7 @@ public class NewMusicFeaturesRecord {
     public void setFeatureImage(String featureImage) {
         this.featureImage = featureImage;
     }
-
+    @DynamoDBAttribute(attributeName = "featureLink")
     public String getFeatureLink() {
         return featureLink;
     }
