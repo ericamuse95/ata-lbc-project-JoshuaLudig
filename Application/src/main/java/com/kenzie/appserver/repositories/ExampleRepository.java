@@ -7,11 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 
 @EnableScan
 public interface ExampleRepository extends CrudRepository<ExampleRecord, String> {
-    Object findArtistsByYear(String id);
 
-    Object findArtistsByGenre(String id);
-
-    Object findArtistsByUserId(String id);
-
-    Object findBySongId(String id);
 }
