@@ -1,48 +1,61 @@
 package com.kenzie.appserver.controller;
 
 import com.kenzie.appserver.controller.model.GetSongDownloadResponse;
+import com.kenzie.appserver.controller.model.SongDownloadCreateRequest;
 import com.kenzie.appserver.controller.model.SongDownloadResponse;
 
 import com.kenzie.appserver.service.NewMusicFeaturesService;
 import com.kenzie.appserver.service.model.SongInfo;
+import com.kenzie.appserver.service.model.SongService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.UUID.randomUUID;
 
 @RestController
 @RequestMapping("/song")
 public class SongDownloadController {
 
-    private NewMusicFeaturesService newMusicFeaturesService;
-
-    SongDownloadController(NewMusicFeaturesService newMusicFeaturesService) {
-        this.newMusicFeaturesService = newMusicFeaturesService;
-    }
-
-    @PostMapping
-    public ResponseEntity<SongDownloadResponse> addNewSong(@RequestBody SongDownloadResponse songDownloadResponse) {
-        SongInfo song = new SongInfo();
-        song.setSongId(songDownloadResponse.getSongId());
-        song.setArtistByUserId(songDownloadResponse.getArtistId());
-        song.setArtistByYear(songDownloadResponse.getArtistByYear());
-        song.setArtistByGenre(songDownloadResponse.getArtistByGenre());
+    private SongService songService;
 
 
-        return ResponseEntity.created(URI.create("/songId/" + songDownloadResponse.getSongId())).body(songDownloadResponse);
+    SongDownloadController(SongService songService) {
+        this.songService = songService;
     }
 
     @GetMapping("/{songId}")
-    public ResponseEntity<GetSongDownloadResponse> getSongById(@PathVariable("songId") String songId) {
+    public ResponseEntity<SongDownloadResponse> getSongById(@PathVariable("songId") String songId) {
 
-        SongInfo song  = (SongInfo) newMusicFeaturesService.findBySongId(songId);
 
-        if (song == null) {
+        SongInfo songInfo = songService.findBySongId(songId);
+        if (songId == null) {
             return ResponseEntity.notFound().build();
         }
-        GetSongDownloadResponse response = createGetSongDownloadResponse(song);
 
-        return ResponseEntity.ok(response);
+        SongDownloadResponse songDownloadResponse = new SongDownloadResponse();
+        songDownloadResponse.setSongId(songInfo.getSongId());
+
+        return ResponseEntity.ok(songDownloadResponse);
+    }
+
+    @PostMapping
+    public ResponseEntity<SongDownloadResponse> addNewSong(@RequestBody SongDownloadCreateRequest songDownloadCreateRequest) {
+        SongInfo songInfo = new SongInfo(songDownloadCreateRequest.getSongId(),
+                songDownloadCreateRequest.getArtistId(), songDownloadCreateRequest.getArtistByYear(),
+                songDownloadCreateRequest.getArtistByGenre());
+
+        SongDownloadResponse songDownloadResponse = new SongDownloadResponse();
+
+        songDownloadResponse.setSongId(songInfo.getSongId());
+        songDownloadResponse.setArtistId(songInfo.getArtistByUserId());
+        songDownloadResponse.setArtistByYear(songInfo.getArtistByYear());
+        songDownloadResponse.setArtistByGenre(songInfo.getArtistByGenre());
+
+        return ResponseEntity.created(URI.create("/songId/" + songDownloadResponse.getSongId())).body(songDownloadResponse);
     }
 
 
