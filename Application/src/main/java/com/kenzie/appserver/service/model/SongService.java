@@ -10,6 +10,9 @@ import com.kenzie.appserver.service.model.Example;
 import com.kenzie.appserver.service.model.SongInfo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class SongService {
     private SongServiceRepository songServiceRepository;
@@ -26,6 +29,11 @@ public class SongService {
                 .orElse(null);
 
         return songInfoFromBackend;
+    }
+    public List<SongInfo> findAll(){
+        List<SongInfo> songInfoList = new ArrayList<>();
+        songServiceRepository.findAll().forEach(songInfo -> songInfoList.add(new SongInfo(songInfo.getSongId(),songInfo.getArtistByGenre(),songInfo.getArtistByUserId(),songInfo.getArtistByYear())));
+        return songInfoList;
     }
 
     public SongInfo addNewSong(SongInfo songInfo) {

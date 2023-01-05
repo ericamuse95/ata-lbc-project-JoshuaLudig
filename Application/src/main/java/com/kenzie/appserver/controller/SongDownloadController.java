@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,6 +57,17 @@ public class SongDownloadController {
         songDownloadResponse.setArtistByGenre(songInfo.getArtistByGenre());
 
         return ResponseEntity.created(URI.create("/songId/" + songDownloadResponse.getSongId())).body(songDownloadResponse);
+    }
+
+    @GetMapping("/songId/all")
+    public ResponseEntity<List<SongDownloadResponse>> getAllSongs() {
+        List<SongInfo> songInfoList = songService.findAll();
+        List<SongDownloadResponse> responses = new ArrayList<>();
+        for(SongInfo songInfo : songInfoList) {
+            SongDownloadResponse songDownloadResponse = createSongDownloadResponse(songInfo);
+            responses.add(songDownloadResponse);
+        }
+        return ResponseEntity.ok(responses);
     }
 
 
