@@ -5,6 +5,7 @@ import jdk.internal.icu.lang.UCharacterDirection;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
 
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
@@ -32,8 +33,8 @@ public class AppDisplayServiceTest<AppDisplay> {
     /**------------------------------------------------------------------------
             *appDisplayService.findBySongId
      *------------------------------------------------------------------------**/
-
-// Need to add a test for findBySongId
+    // Need to add a test for findBySongId
+    @ParameterizedTest
     @Test
    void findBySongId() {
         // GIVEN
@@ -72,7 +73,7 @@ public class AppDisplayServiceTest<AppDisplay> {
         }
     }
     // I will add a test to locate Artists by their User Ids
-
+    @ParameterizedTest
     @Test
     void findArtists() {
         // GIVEN
@@ -86,6 +87,7 @@ public class AppDisplayServiceTest<AppDisplay> {
         Assertions.assertTrue((BooleanSupplier) appDisplay, "The Artist user Id is successfully located");
     }
     // I will also add a test to find Artists in our display by their Genres
+    @ParameterizedTest
     @Test
     void findArtistsByGenre() {
         // GIVEN
@@ -101,6 +103,7 @@ public class AppDisplayServiceTest<AppDisplay> {
     }
     // Adding in a test to locate Artists by their year of music release
 
+    @ParameterizedTest
     @Test
     void findArtistsByYear() {
         // GIVEN
