@@ -34,31 +34,31 @@ class SongDownloadControllerTest {
     @Test
     public void getBySongId_Exists() throws Exception {
         //GIVEN
-        String songId = "Bad Habits";
-        String artistByUserId = "Ed Sheeran";
+        String songId = "Streets";
+        String artistByUserId = "Doja Cat";
         String artistByGenre = "Pop";
-        String artistByYear = "2020";
+        String artistByYear = "2019";
 
         SongInfo songInfo = new SongInfo(songId,artistByUserId,artistByGenre,artistByYear);
 
-        SongInfo song = songService.findBySongId(String.valueOf(new SongInfo(songId, artistByUserId,
-                artistByGenre, artistByYear)));
+        songService.addNewSong(songInfo);
 
-        mvc.perform(get("/songInfo/{songId}", song.getSongId())
+        String songName = songService.findBySongId(songInfo.getSongId()).getSongId();
+
+        mvc.perform(get("/song/{songId}", songInfo.getSongId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect((jsonPath("songId"))
                         .value((is(songId))))
                 .andExpect(status().isOk());
-
     }
 
     @Test
     public void createSongRequest_CreateSuccessful() throws Exception {
         //GIVEN
-        String songId = "Lose Yourself";
-        String artistByUserId = "Eminem";
-        String artistByGenre = "Rap/HipHop";
-        String artistByYear = "2002";
+        String songId = "Crystallize";
+        String artistByUserId = "Lindsey Stirling";
+        String artistByGenre = "Pop";
+        String artistByYear = "2012";
 
         SongDownloadResponse songDownloadResponse = new SongDownloadResponse();
 

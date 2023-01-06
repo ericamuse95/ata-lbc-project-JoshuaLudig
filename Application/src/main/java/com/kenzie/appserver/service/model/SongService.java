@@ -31,12 +31,12 @@ public class SongService {
         return songInfoList;
     }
 
-    public SongInfo addNewSong(SongInfo songInfo) {
+    public void addNewSong(SongInfo songInfo) {
         SongServiceRecord songServiceRecord = new SongServiceRecord();
         songServiceRecord.setSongId(songInfo.getSongId());
         songServiceRecord.setArtistByGenre(songInfo.getArtistByGenre());
         songServiceRecord.setArtistByUserId(songInfo.getArtistByUserId());
         songServiceRecord.setArtistByYear(songInfo.getArtistByYear());
-        return songInfo;
+        songServiceRepository.save(songServiceRecord);
     }
 }
