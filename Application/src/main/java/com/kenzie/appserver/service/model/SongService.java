@@ -1,13 +1,8 @@
 package com.kenzie.appserver.service.model;
 
 import com.kenzie.appserver.repositories.SongServiceRepository;
-import com.kenzie.appserver.repositories.model.ExampleRecord;
-import com.kenzie.appserver.repositories.ExampleRepository;
-import com.kenzie.appserver.repositories.model.NewMusicFeaturesRepository;
 import com.kenzie.appserver.repositories.model.SongServiceRecord;
-import com.kenzie.appserver.service.model.Example;
 
-import com.kenzie.appserver.service.model.SongInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
