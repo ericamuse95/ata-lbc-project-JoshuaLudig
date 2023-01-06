@@ -33,9 +33,9 @@ public class SongDownloadController {
 
 
         SongInfo songInfo = songService.findBySongId(songId);
-        if (songId == null) {
-            return ResponseEntity.notFound().build();
-        }
+//        if (songId == null) {
+//            return ResponseEntity.notFound().build();
+//        }
 
         SongDownloadResponse songDownloadResponse = new SongDownloadResponse();
         songDownloadResponse.setSongId(songInfo.getSongId());
