@@ -44,11 +44,6 @@ public class SongServiceRecord{
         this.artistByYear = artistByYear;
     }
 
-    @Override
-    public int hashCode() {
-        return songId.hashCode();
-    }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -63,6 +58,11 @@ public class SongServiceRecord{
         }
         SongServiceRecord rhs = (SongServiceRecord) obj;
         return songId.equals(rhs.songId);
+    }
+
+    @Override
+    public int hashCode() {
+        return songId.hashCode();
     }
 }
 
