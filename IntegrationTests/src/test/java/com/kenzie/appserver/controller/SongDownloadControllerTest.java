@@ -1,20 +1,16 @@
 package com.kenzie.appserver.controller;
 
-import com.kenzie.appserver.IntegrationTest;
-import com.kenzie.appserver.controller.model.ExampleCreateRequest;
-import com.kenzie.appserver.service.ExampleService;
-import com.kenzie.appserver.service.model.Example;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.kenzie.appserver.IntegrationTest;
+import com.kenzie.appserver.controller.model.SongDownloadResponse;
+import com.kenzie.appserver.service.model.SongInfo;
 import com.kenzie.appserver.service.model.SongService;
 import net.andreinc.mockneat.MockNeat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -36,38 +32,51 @@ class SongDownloadControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void getById_Exists() throws Exception {
-        String id = UUID.randomUUID().toString();
-        String name = mockNeat.strings().valStr();
+    public void getBySongId_Exists() throws Exception {
+        //GIVEN
+        String songId = "Bad Habits";
+        String artistByUserId = "Ed Sheeran";
+        String artistByGenre = "Pop";
+        String artistByYear = "2020";
 
-        Example example = new Example(id, name);
-        Example persistedExample = exampleService.addNewExample(example);
-        mvc.perform(get("/example/{id}", persistedExample.getId())
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("id")
-                        .value(is(id)))
-                .andExpect(jsonPath("name")
-                        .value(is(name)))
+        SongInfo songInfo = new SongInfo(songId,artistByUserId,artistByGenre,artistByYear);
+
+        SongInfo song = songService.findBySongId(String.valueOf(new SongInfo(songId, artistByUserId,
+                artistByGenre, artistByYear)));
+
+        mvc.perform(get("/songInfo/{songId}", song.getSongId())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect((jsonPath("songId"))
+                        .value((is(songId))))
                 .andExpect(status().isOk());
+
     }
 
     @Test
-    public void createExample_CreateSuccessful() throws Exception {
-        String name = mockNeat.strings().valStr();
+    public void createSongRequest_CreateSuccessful() throws Exception {
+        //GIVEN
+        String songId = "Lose Yourself";
+        String artistByUserId = "Eminem";
+        String artistByGenre = "Rap/HipHop";
+        String artistByYear = "2002";
 
-        ExampleCreateRequest exampleCreateRequest = new ExampleCreateRequest();
-        exampleCreateRequest.setName(name);
+        SongDownloadResponse songDownloadResponse = new SongDownloadResponse();
+
+        songDownloadResponse.setSongId(songId);
+        songDownloadResponse.setArtistId(artistByUserId);
+        songDownloadResponse.setArtistByGenre(artistByGenre);
+        songDownloadResponse.setArtistByYear(artistByYear);
 
         mapper.registerModule(new JavaTimeModule());
 
-        mvc.perform(post("/example")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(exampleCreateRequest)))
-                .andExpect(jsonPath("id")
+        //WHEN/THEN
+        mvc.perform(post("/song")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(songDownloadResponse)))
+                .andExpect(jsonPath("songId")
                         .exists())
-                .andExpect(jsonPath("name")
-                        .value(is(name)))
                 .andExpect(status().isCreated());
+
     }
 }

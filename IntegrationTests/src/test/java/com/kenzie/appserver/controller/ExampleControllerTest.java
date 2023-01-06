@@ -7,7 +7,7 @@ import com.kenzie.appserver.service.model.Example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.kenzie.appserver.service.model.SongInfo;
+import com.kenzie.appserver.service.model.SongService;
 import net.andreinc.mockneat.MockNeat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +36,11 @@ class ExampleControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void getBySongId_Exists() throws Exception {
+    public void getById_Exists() throws Exception {
         String id = UUID.randomUUID().toString();
         String name = mockNeat.strings().valStr();
 
-        SongInfo songInfo = new SongInfo(id, name);
+        Example example = new Example(id, name);
         Example persistedExample = exampleService.addNewExample(example);
         mvc.perform(get("/example/{id}", persistedExample.getId())
                         .accept(MediaType.APPLICATION_JSON))
