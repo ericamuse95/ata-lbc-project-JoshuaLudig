@@ -1,33 +1,28 @@
-//package com.kenzie.appserver.repositories.model;
-//
-//import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-//import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-//
-//import java.util.Objects;
-//
-//public class NewMusicFeaturesRecord {
-//    private String featureId;
-//    private String featureName;
-//    private String featureDescription;
-//    private String featureImage;
-//    private String featureLink;
-//    private String songId;
-//
-//    @DynamoDBAttribute(attributeName = "featureId")
-//    public String getFeatureId() {
-//        return featureId;
-//    }
-//
-//    public void setFeatureId(String featureId) {
-//        this.featureId = featureId;
-//    }
-//    @DynamoDBHashKey(attributeName = "featureName")
-//    public String getSongId() {
-//        return songId;
-//    }
-//
-//    public void setSongId(String songId) {
-//        this.songId = songId;
+package com.kenzie.appserver.repositories.model;
+
+public class NewMusicFeaturesRecord {
+private String featureId;
+private String featureName;
+private String featureDescription;
+private String featureImage;
+private String featureLink;
+private String songId;
+
+  @DynamoDBAttribute(attributeName = "featureId")
+   public String getFeatureId() {
+       return featureId;
+  }
+
+    public void setFeatureId(String featureId) {
+        this.featureId = featureId;
+    }
+   @DynamoDBHashKey(attributeName = "featureName")
+   public String getSongId() {
+       return songId;
+    }
+
+   public void setSongId(String songId) {
+       this.songId = songId;
 //    }
 //    @DynamoDBAttribute(attributeName = "featureDescription")
 //    public String getFeatureName() {
