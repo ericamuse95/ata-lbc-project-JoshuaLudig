@@ -1,6 +1,5 @@
 package com.kenzie.appserver.service;
 
-import com.kenzie.appserver.repositories.model.NewMusicFeaturesRecord;
 import com.kenzie.appserver.repositories.model.NewMusicFeaturesRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,18 +28,11 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
         this.songId = songId;
     }
 
-//    public NewMusicFeaturesServiceTest(NewMusicFeaturesRepository newMusicFeaturesRepository,
-//                                       NewMusicFeaturesService newMusicFeaturesService) {
-//        this.newMusicFeaturesRepository = newMusicFeaturesRepository;
-//        this.newMusicFeaturesService = newMusicFeaturesService;
-//    }
-
     @BeforeEach
     void setup() {
         newMusicFeaturesRepository = mock(NewMusicFeaturesRepository.class);
         newMusicFeaturesService = new NewMusicFeaturesService(newMusicFeaturesRepository, songId);
     }
-
 
     @Test
     void findByFeatureId() {
@@ -80,6 +72,9 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
         newMusicFeaturesRepository.getNewMusicFeaturesRecord();
         // THEN
         Assertions.assertEquals(newMusicFeatures, newMusicFeaturesService.getNewMusicFeaturesRecord(), "The id matches");
+    }
+
+    private class NewMusicFeaturesRecord {
     }
 }
 

@@ -1,6 +1,6 @@
 import BaseClass from "../util/baseClass";
 import DataStore from "../util/DataStore";
-import ContentClient from "../api/contentClient";
+import ContentClient from "../api/ContentClient";
 
 /**
  * Logic needed for the display content page of the website.
