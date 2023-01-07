@@ -19,9 +19,6 @@ public class NewMusicFeaturesServiceTest<NewMusicFeatures> {
     private NewMusicFeaturesService.NewMusicFeatures featureId;
     private NewMusicFeaturesRecord record;
 
-    public NewMusicFeaturesServiceTest() {
-        this(false, null);
-    }
 
     public NewMusicFeaturesServiceTest(boolean newMusicFeatures, NewMusicFeaturesService.NewMusicFeatures songId) {
         this.newMusicFeatures = newMusicFeatures;
