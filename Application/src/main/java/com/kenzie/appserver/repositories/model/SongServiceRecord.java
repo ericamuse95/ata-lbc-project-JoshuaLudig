@@ -10,6 +10,7 @@ public class SongServiceRecord{
     private String artistByUserId;
     private String artistByGenre;
     private String artistByYear;
+    private boolean isFavorite;
     @DynamoDBHashKey(attributeName = "SongId")
     public String getSongId() {
         return songId;
@@ -43,6 +44,11 @@ public class SongServiceRecord{
     public void setArtistByYear(String artistByYear) {
         this.artistByYear = artistByYear;
     }
+
+    @DynamoDBAttribute(attributeName = "isFavorite")
+    public boolean getIsFavorite() {return isFavorite;}
+
+    public void setIsFavorite(boolean isFavorite) {this.isFavorite = isFavorite;}
 
 
     @Override

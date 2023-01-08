@@ -17,6 +17,9 @@ public class GetSongDownloadResponse {
     @JsonProperty("artistByGenre")
     private String artistByGenre;
 
+    @JsonProperty("isFavorite")
+    private boolean isFavorite;
+
 
     public String getSongId() {return songId;}
 
@@ -33,4 +36,12 @@ public class GetSongDownloadResponse {
     public String getArtistByGenre() {return artistByGenre;}
 
     public void setArtistByGenre(String artistByGenre) {this.artistByGenre = artistByGenre;}
+
+    public boolean getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
 }

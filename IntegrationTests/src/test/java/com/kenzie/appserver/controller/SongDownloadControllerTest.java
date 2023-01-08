@@ -11,6 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import static org.hamcrest.Matchers.hasSize;
+
+import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -38,8 +42,9 @@ class SongDownloadControllerTest {
         String artistByUserId = "Doja Cat";
         String artistByGenre = "Pop";
         String artistByYear = "2019";
+        boolean isFavorite = false;
 
-        SongInfo songInfo = new SongInfo(songId,artistByUserId,artistByGenre,artistByYear);
+        SongInfo songInfo = new SongInfo(songId,artistByUserId,artistByGenre,artistByYear, isFavorite);
 
         songService.addNewSong(songInfo);
 
@@ -66,6 +71,7 @@ class SongDownloadControllerTest {
         songDownloadResponse.setArtistId(artistByUserId);
         songDownloadResponse.setArtistByGenre(artistByGenre);
         songDownloadResponse.setArtistByYear(artistByYear);
+        songDownloadResponse.setIsFavorite(false);
 
         mapper.registerModule(new JavaTimeModule());
 
@@ -78,5 +84,80 @@ class SongDownloadControllerTest {
                         .exists())
                 .andExpect(status().isCreated());
 
+    }
+    @Test
+    public void getAllSongs_Success() throws Exception {
+        //GIVEN
+        String songId = "Royals";
+        String artistByUserId = "Lorde";
+        String artistByGenre = "Pop";
+        String artistByYear = "2013";
+        boolean isFavorite = false;
+
+        songService.addNewSong(new SongInfo(songId, artistByUserId, artistByGenre, artistByYear, isFavorite));
+
+        String songId2 = "Streets";
+        String artistByUserId2 = "Doja Cat";
+        String artistByGenre2 = "Pop";
+        String artistByYear2 = "2019";
+        boolean isFavorite2 = false;
+
+        songService.addNewSong(new SongInfo(songId2,artistByUserId2,artistByGenre2,artistByYear2,isFavorite2));
+
+        mvc.perform(get("/song/all")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].songId").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].artistId").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].artistByYear").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].artistByGenre").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].isFavorite").isBoolean())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].songId").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].artistId").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].artistByYear").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].artistByGenre").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].isFavorite").isBoolean());
+    }
+    @Test
+    public void getAllFavoriteSongs_Success() throws Exception {
+        //GIVEN
+        String songId = "Royals";
+        String artistByUserId = "Lorde";
+        String artistByGenre = "Pop";
+        String artistByYear = "2013";
+        boolean isFavorite = false;
+
+        songService.addNewSong(new SongInfo(songId, artistByUserId, artistByGenre, artistByYear, isFavorite));
+
+        String songId2 = "Streets";
+        String artistByUserId2 = "Doja Cat";
+        String artistByGenre2 = "Pop";
+        String artistByYear2 = "2019";
+        boolean isFavorite2 = true;
+
+        songService.addNewSong(new SongInfo(songId2,artistByUserId2,artistByGenre2,artistByYear2,isFavorite2));
+
+        String songId3 = "Montero";
+        String artistByUserId3 = "Lil Nas X";
+        String artistByGenre3 = "Hip Hop";
+        String artistByYear3 = "2021";
+        boolean isFavorite3 = true;
+
+        songService.addNewSong(new SongInfo(songId3,artistByUserId3,artistByGenre3,artistByYear3,isFavorite3));
+
+        mvc.perform(get("/song/favorites")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].songId").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].artistId").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].artistByYear").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].artistByGenre").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].isFavorite").isBoolean())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].songId").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].artistId").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].artistByYear").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].artistByGenre").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].isFavorite").isBoolean());
     }
 }

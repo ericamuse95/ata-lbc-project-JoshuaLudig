@@ -5,12 +5,15 @@ public class SongInfo {
     private final String artistByUserId;
     private final String artistByGenre;
     private final String artistByYear;
+    private final boolean isFavorite;
 
-    public SongInfo(String songId, String artistByUserId, String artistByGenre, String artistByYear) {
+
+    public SongInfo(String songId, String artistByUserId, String artistByGenre, String artistByYear, boolean isFavorite) {
         this.songId = songId;
         this.artistByUserId = artistByUserId;
         this.artistByGenre = artistByGenre;
         this.artistByYear = artistByYear;
+        this.isFavorite = isFavorite;
     }
 
     public String getSongId() {
@@ -28,4 +31,7 @@ public class SongInfo {
     public String getArtistByYear() {
         return artistByYear;
     }
+
+    public boolean getIsFavorite(){ return isFavorite;}
+
 }
