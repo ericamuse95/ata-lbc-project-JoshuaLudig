@@ -2,7 +2,9 @@ package com.kenzie.appserver.repositories.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
+@DynamoDBTable(tableName = "NewMusicFeatures")
 public class NewMusicFeaturesRecord {
 private String featureId;
 private String featureName;
@@ -19,7 +21,7 @@ private String songId;
     public void setFeatureId(String featureId) {
         this.featureId = featureId;
     }
-   @DynamoDBHashKey(attributeName = "featureName")
+   @DynamoDBHashKey(attributeName = "songId")
    public String getSongId() {
        return songId;
     }
@@ -27,7 +29,7 @@ private String songId;
    public void setSongId(String songId) {
        this.songId = songId;
     }
-    @DynamoDBAttribute(attributeName = "featureDescription")
+    @DynamoDBAttribute(attributeName = "featureName")
     public String getFeatureName() {
         return featureName;
     }
