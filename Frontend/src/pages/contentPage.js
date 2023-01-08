@@ -33,8 +33,8 @@ class contentPage extends BaseClass {
 
         if (example) {
             resultArea.innerHTML = `
-                <div>ID: ${example.id}</div>
-                <div>Name: ${example.name}</div>
+                <div>ID: ${content.id}</div>
+                <div>Name: ${content.name}</div>
             `
         } else {
             resultArea.innerHTML = "No Item";
@@ -48,10 +48,10 @@ class contentPage extends BaseClass {
         event.preventDefault();
 
         let id = document.getElementById("id-field").value;
-        this.dataStore.set("example", null);
+        this.dataStore.set("content", null);
 
         let result = await this.client.getExample(id, this.errorHandler);
-        this.dataStore.set("example", result);
+        this.dataStore.set("content", result);
         if (result) {
             this.showMessage(`Got ${result.name}!`)
         } else {
@@ -62,15 +62,15 @@ class contentPage extends BaseClass {
     async onCreate() {
         // Prevent the page from refreshing on form submit
         event.preventDefault();
-        this.dataStore.set("example", null);
+        this.dataStore.set("content", null);
 
         let name = document.getElementById("create-name-field").value;
 
         const createdExample = await this.client.createExample(name, this.errorHandler);
-        this.dataStore.set("example", createdExample);
+        this.dataStore.set("content", createdExample);
 
         if (createdContent) {
-            this.showMessage(`Created ${createdExample.name}!`)
+            this.showMessage(`Created ${createdContent.name}!`)
         } else {
             this.errorHandler("Error creating!  Try again...");
         }
