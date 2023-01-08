@@ -26,12 +26,12 @@ class contentPage extends BaseClass {
 
     // Render Methods --------------------------------------------------------------------------------------------------
 
-    async renderExample() {
+    async renderContent() {
         let resultArea = document.getElementById("Artist-info");
 
-        const example = this.dataStore.get("Artist");
+        const content = this.dataStore.get("Artist");
 
-        if (example) {
+        if (content) {
             resultArea.innerHTML = `
                 <div>ID: ${content.id}</div>
                 <div>Name: ${content.name}</div>
@@ -50,7 +50,7 @@ class contentPage extends BaseClass {
         let id = document.getElementById("id-field").value;
         this.dataStore.set("content", null);
 
-        let result = await this.client.getExample(id, this.errorHandler);
+        let result = await this.client.getContent(id, this.errorHandler);
         this.dataStore.set("content", result);
         if (result) {
             this.showMessage(`Got ${result.name}!`)
@@ -66,8 +66,8 @@ class contentPage extends BaseClass {
 
         let name = document.getElementById("create-name-field").value;
 
-        const createdExample = await this.client.createExample(name, this.errorHandler);
-        this.dataStore.set("content", createdExample);
+        const createdContent = await this.client.createContent(name, this.errorHandler);
+        this.dataStore.set("content", createdContent);
 
         if (createdContent) {
             this.showMessage(`Created ${createdContent.name}!`)
