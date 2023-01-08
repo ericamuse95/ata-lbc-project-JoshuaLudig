@@ -1,7 +1,5 @@
 package com.kenzie.appserver.service.model;
 
-import com.kenzie.appserver.repositories.model.NewMusicFeaturesRecord;
-
 public class NewMusicFeatures {
     private final String songId;
     private final String featureName;
@@ -18,16 +16,6 @@ public class NewMusicFeatures {
         this.featureImage = featureImage;
         this.featureLink = featureLink;
     }
-
-    public NewMusicFeatures(NewMusicFeaturesRecord newmusicfeatures) {
-        this.songId = newmusicfeatures.getSongId();
-        this.featureName = newmusicfeatures.getFeatureName();
-        this.featureId = newmusicfeatures.getFeatureId();
-        this.featureDescription = newmusicfeatures.getFeatureDescription();
-        this.featureImage = newmusicfeatures.getFeatureImage();
-        this.featureLink = newmusicfeatures.getFeatureLink();
-    }
-
     //add String getter methods for each field
     public String getSongId() {
         return songId;
