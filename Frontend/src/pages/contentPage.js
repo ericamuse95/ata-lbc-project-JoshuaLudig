@@ -85,4 +85,4 @@ const main = async () => {
     contentPage.mount();
 };
 
-window.addContent('ContentLoaded', main);
+//window.addContent('ContentLoaded', main);
