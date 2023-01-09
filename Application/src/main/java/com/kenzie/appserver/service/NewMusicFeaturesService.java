@@ -47,5 +47,4 @@ public class NewMusicFeaturesService {
                 newmusicfeatures.getFeatureImage(), newmusicfeatures.getFeatureLink())));
         return musicFeaturesList;
     }
-
 }

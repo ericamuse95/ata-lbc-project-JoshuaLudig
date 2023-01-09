@@ -186,4 +186,59 @@ public class SongServiceTest {
 
         Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
+    @Test
+    void findArtistByUserId(){
+      //GIVEN
+          String songId = UUID.randomUUID().toString();
+
+            SongServiceRecord songServiceRecord = new SongServiceRecord();
+            songServiceRecord.setSongId("Streets");
+            songServiceRecord.setArtistByUserId("Doja Cat");
+            songServiceRecord.setArtistByYear("2019");
+            songServiceRecord.setArtistByGenre("Pop");
+
+            ArgumentCaptor<String> songCapture = ArgumentCaptor.forClass(String.class);
+            //WHEN/THEN
+            Optional<SongServiceRecord> recordOptional = Optional.of(songServiceRecord);
+            Mockito.when(songServiceRepository.findById(songId)).thenReturn(recordOptional);
+    }
+    @Test
+    void findArtistByGenre(){
+        //GIVEN
+        String songId = UUID.randomUUID().toString();
+        SongServiceRecord songServiceRecord = new SongServiceRecord();
+        songServiceRecord.setSongId("Streets");
+        songServiceRecord.setArtistByUserId("Doja Cat");
+        songServiceRecord.setArtistByYear("2019");
+        songServiceRecord.setArtistByGenre("Pop");
+        ArgumentCaptor<String> songCapture = ArgumentCaptor.forClass(String.class);
+        //WHEN/THEN
+        Optional<SongServiceRecord> recordOptional = Optional.of(songServiceRecord);
+    }
+    @Test
+    void findArtistByYear(){
+        //GIVEN
+        String songId = UUID.randomUUID().toString();
+        SongServiceRecord songServiceRecord = new SongServiceRecord();
+        songServiceRecord.setSongId("Streets");
+        songServiceRecord.setArtistByUserId("Doja Cat");
+        songServiceRecord.setArtistByYear("2019");
+        songServiceRecord.setArtistByGenre("Pop");
+        ArgumentCaptor<String> songCapture = ArgumentCaptor.forClass(String.class);
+        //WHEN/THEN
+        Optional<SongServiceRecord> recordOptional = Optional.of(songServiceRecord);
+    }
+    @Test
+    void getFavoriteSongs(){
+        //GIVEN
+        String songId = UUID.randomUUID().toString();
+        SongServiceRecord songServiceRecord = new SongServiceRecord();
+        songServiceRecord.setSongId("Streets");
+        songServiceRecord.setArtistByUserId("Doja Cat");
+        songServiceRecord.setArtistByYear("2019");
+        songServiceRecord.setArtistByGenre("Pop");
+        ArgumentCaptor<String> songCapture = ArgumentCaptor.forClass(String.class);
+        //WHEN/THEN
+        Optional<SongServiceRecord> recordOptional = Optional.of(songServiceRecord);
+    }
 }
