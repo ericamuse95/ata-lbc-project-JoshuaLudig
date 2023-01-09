@@ -9,7 +9,7 @@ class contentPage extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGet', 'onCreate', 'renderContent'], this);
+        this.bindClassMethods(['onGetContents', 'onCreate', 'renderContent'], this);
         this.dataStore = new DataStore();
     }
 
@@ -18,10 +18,10 @@ class contentPage extends BaseClass {
      */
     async mount() {
 
-        document.getElementById('create-content-form').addAppContent('submit', this.onCreate);
+        document.getElementById('create-content-form').addContent('submit', this.onCreate);
         this.client = new ContentClient();
 
-        this.dataStore.addAppContent(this.renderContent)
+        this.dataStore.addContent(this.renderContent)
     }
 
     // Render Methods --------------------------------------------------------------------------------------------------
@@ -85,4 +85,4 @@ const main = async () => {
     contentPage.mount();
 };
 
-window.addAppContent('AppContentLoaded', main);
+window.addContent('ContentLoaded', main);
