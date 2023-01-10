@@ -12,7 +12,7 @@ public class SongServiceRecord{
     private String artistByGenre;
     private String artistByYear;
     private boolean isFavorite;
-    @DynamoDBHashKey(attributeName = "Song Name")
+    @DynamoDBAttribute(attributeName = "Song Name")
     public String getSongId() {
         return songId;
     }
@@ -20,7 +20,7 @@ public class SongServiceRecord{
     public void setSongId(String songId) {
         this.songId = songId;
     }
-    @DynamoDBRangeKey(attributeName = "Artist")
+    @DynamoDBHashKey(attributeName = "Artist")
     public String getArtistByUserId() {
         return artistByUserId;
     }

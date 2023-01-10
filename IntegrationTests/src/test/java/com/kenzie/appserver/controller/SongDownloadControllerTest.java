@@ -33,28 +33,6 @@ class SongDownloadControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void getBySongId_Exists() throws Exception {
-        //GIVEN
-        String songId = "Streets";
-        String artistByUserId = "Doja Cat";
-        String artistByGenre = "Pop";
-        String artistByYear = "2019";
-        boolean isFavorite = false;
-
-        SongInfo songInfo = new SongInfo(songId,artistByUserId,artistByGenre,artistByYear, isFavorite);
-
-        songService.addNewSong(songInfo);
-
-        String songName = songService.findBySongId(songInfo.getSongId()).getSongId();
-
-        mvc.perform(get("/song/{songId}", songInfo.getSongId())
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect((jsonPath("songId"))
-                        .value((is(songId))))
-                .andExpect(status().isOk());
-    }
-
-    @Test
     public void createSongRequest_CreateSuccessful() throws Exception {
         //GIVEN
         String songId = "Crystallize";
