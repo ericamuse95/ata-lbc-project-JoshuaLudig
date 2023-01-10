@@ -5,11 +5,11 @@ import ContentClient from "../api/ContentClient";
 /**
  * Logic needed for the display content page of the website.
  */
-class contentPage extends BaseClass {
+class ContentPage extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGetContents', 'onCreate', 'renderContent'], this);
+        this.bindClassMethods(['onGet', 'onCreate', 'renderContent'], this);
         this.dataStore = new DataStore();
     }
 
@@ -18,23 +18,24 @@ class contentPage extends BaseClass {
      */
     async mount() {
 
-        document.getElementById('create-content-form').addContent('submit', this.onCreate);
+        document.getElementById('create-content-form').addEventListener('submit', this.onCreate);
         this.client = new ContentClient();
 
-        this.dataStore.addContent(this.renderContent)
+        this.dataStore.addChangeListener(this.renderContent)
     }
 
     // Render Methods --------------------------------------------------------------------------------------------------
 
     async renderContent() {
-        let resultArea = document.getElementById("Artist-info");
+        let resultArea = document.getElementById("result");
 
-        const content = this.dataStore.get("Artist");
+        const content = this.dataStore.get("content");
+        console.log(content);
 
         if (content) {
             resultArea.innerHTML = `
-                <div>ID: ${content.id}</div>
-                <div>Name: ${content.name}</div>
+                <div>ID: ${content.artistId}</div>
+                <div>Name: ${content.songId}</div>
             `
         } else {
             resultArea.innerHTML = "No Item";
@@ -59,21 +60,25 @@ class contentPage extends BaseClass {
         }
     }
 
-    async onCreate() {
+    // This works do not change!
+    async onCreate(event) {
         // Prevent the page from refreshing on form submit
         event.preventDefault();
         this.dataStore.set("content", null);
 
-        let name = document.getElementById("create-name-field").value;
+        let name = document.getElementById("create-content-SongId").value;
+        let artistId = document.getElementById("create-content-Artist").value;
+        let artistByYear = document.getElementById("create-content-Year").value;
+        let artistByGenre = document.getElementById("create-content-Genre").value;
+        const createContent = await this.client.createContent(name, artistId, artistByYear, artistByGenre,this.errorHandler);
+        this.dataStore.set("content", createContent);
 
-        const createdContent = await this.client.createContent(name, this.errorHandler);
-        this.dataStore.set("content", createdContent);
-
-        if (createdContent) {
-            this.showMessage(`Created ${createdContent.name}!`)
+        if (createContent) {
+            this.showMessage(`Create ${createContent.name}!`)
         } else {
             this.errorHandler("Error creating!  Try again...");
         }
+        this.renderContent();
     }
 }
 
@@ -85,4 +90,4 @@ const main = async () => {
     contentPage.mount();
 };
 
-//window.addContent('ContentLoaded', main);
+window.addEventListener('DOMContentLoaded', main);

@@ -11,7 +11,7 @@ export default class ContentClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['ArtistLoaded', 'SongIdLoaded', 'GenreLoaded', 'YearLoaded', 'getContent', 'createContent'];
+        const methodsToBind = ['getContent', 'createContent', 'clientLoaded', 'getAllContent'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);
@@ -41,11 +41,14 @@ export default class ContentClient extends BaseClass {
             this.handleError("getContent", error, errorCallback)
         }
     }
-    async createContent(name, errorCallback) {
+    //This works, do not change!
+    async createContent(name, artistId, artistByYear, artistByGenre,errorCallback) {
         try {
-            const response = await this.client.post(`content`, {
-                name: name
+        console.log("createContent");
+            const response = await this.client.post(`song`, {
+                "songId": name, "artistId": artistId, "artistByYear": artistByYear, "artistByGenre": artistByGenre, "isFavorite": false
             });
+            console.log(response);
             return response.data;
         } catch (error) {
             this.handleError("createContent", error, errorCallback);
