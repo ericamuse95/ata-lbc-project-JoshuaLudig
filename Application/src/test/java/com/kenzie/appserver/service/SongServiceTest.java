@@ -9,11 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.web.server.ResponseStatusException;
-
-import javax.swing.text.html.Option;
 import java.util.Optional;
 import java.util.UUID;
-
 import static java.util.UUID.randomUUID;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -27,12 +24,6 @@ public class SongServiceTest {
         songServiceRepository = mock(SongServiceRepository.class);
         songService = new SongService(songServiceRepository);
     }
-
-    /**
-     * ------------------------------------------------------------------------
-     * songService.findById
-     * ------------------------------------------------------------------------
-     **/
 
     @Test
     void findBySongId() {
