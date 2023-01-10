@@ -2,6 +2,7 @@ package com.kenzie.appserver.repositories.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 @DynamoDBTable(tableName = "Music")
@@ -19,7 +20,7 @@ public class SongServiceRecord{
     public void setSongId(String songId) {
         this.songId = songId;
     }
-    @DynamoDBAttribute(attributeName = "Artist")
+    @DynamoDBRangeKey(attributeName = "Artist")
     public String getArtistByUserId() {
         return artistByUserId;
     }
