@@ -36,6 +36,8 @@ class ContentPage extends BaseClass {
             resultArea.innerHTML = `
                 <div>ID: ${content.artistId}</div>
                 <div>Name: ${content.songId}</div>
+                <div>Year: ${content.artistByYear}</div>
+                <div>Genre: ${content.artistByGenre}</div>
             `
         } else {
             resultArea.innerHTML = "No Item";
