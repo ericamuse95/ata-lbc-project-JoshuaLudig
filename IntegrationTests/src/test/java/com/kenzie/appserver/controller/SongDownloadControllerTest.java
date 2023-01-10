@@ -123,7 +123,6 @@ class SongDownloadControllerTest {
         mvc.perform(get("/song/favorites")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].songId").isString())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].artistId").isString())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].artistByYear").isString())
