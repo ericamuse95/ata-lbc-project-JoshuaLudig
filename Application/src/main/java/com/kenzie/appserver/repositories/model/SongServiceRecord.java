@@ -11,7 +11,7 @@ public class SongServiceRecord{
     private String artistByGenre;
     private String artistByYear;
     private boolean isFavorite;
-    @DynamoDBHashKey(attributeName = "SongId")
+    @DynamoDBHashKey(attributeName = "Song Name")
     public String getSongId() {
         return songId;
     }
@@ -19,7 +19,7 @@ public class SongServiceRecord{
     public void setSongId(String songId) {
         this.songId = songId;
     }
-    @DynamoDBAttribute(attributeName = "ArtistByUserId")
+    @DynamoDBAttribute(attributeName = "Artist")
     public String getArtistByUserId() {
         return artistByUserId;
     }
@@ -27,7 +27,7 @@ public class SongServiceRecord{
     public void setArtistByUserId(String artistByUserId) {
         this.artistByUserId = artistByUserId;
     }
-    @DynamoDBAttribute(attributeName = "ArtistByGenre")
+    @DynamoDBAttribute(attributeName = "Genre")
     public String getArtistByGenre() {
         return artistByGenre;
     }
@@ -36,7 +36,7 @@ public class SongServiceRecord{
         this.artistByGenre = artistByGenre;
     }
 
-    @DynamoDBAttribute(attributeName = "ArtistByYear")
+    @DynamoDBAttribute(attributeName = "Year Released")
     public String getArtistByYear() {
         return artistByYear;
     }
@@ -45,7 +45,7 @@ public class SongServiceRecord{
         this.artistByYear = artistByYear;
     }
 
-    @DynamoDBAttribute(attributeName = "isFavorite")
+    @DynamoDBAttribute(attributeName = "Favorite")
     public boolean getIsFavorite() {return isFavorite;}
 
     public void setIsFavorite(boolean isFavorite) {this.isFavorite = isFavorite;}
