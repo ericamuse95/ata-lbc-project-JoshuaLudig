@@ -38,8 +38,8 @@ class ContentPage extends BaseClass {
             resultArea.innerHTML = `
                 <div>ID: ${content.artistId}</div>
                 <div>Name: ${content.songId}</div>
-                <div>Year: ${content.artistByYear}</div>
                 <div>Genre: ${content.artistByGenre}</div>
+                <div>Year: ${content.artistByYear}</div>
             `
         } else {
             resultArea.innerHTML = "No Item";
@@ -105,9 +105,9 @@ class ContentPage extends BaseClass {
 
         let name = document.getElementById("create-content-SongId").value;
         let artistId = document.getElementById("create-content-Artist").value;
-        let artistByYear = document.getElementById("create-content-Year").value;
         let artistByGenre = document.getElementById("create-content-Genre").value;
-        const createContent = await this.client.createContent(name, artistId, artistByYear, artistByGenre,this.errorHandler);
+        let artistByYear = document.getElementById("create-content-Year").value;
+        const createContent = await this.client.createContent(name, artistId, artistByGenre, artistByYear,this.errorHandler);
         this.dataStore.set("content", createContent);
 
         if (createContent) {
