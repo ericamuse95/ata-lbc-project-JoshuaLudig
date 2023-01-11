@@ -40,6 +40,16 @@ module.exports = {
       filename: 'content.html',
       inject: false
     }),
+    new HtmlWebpackPlugin({
+        template: './src/songs.html',
+        filename: 'songs.html',
+        inject: false
+    }),
+    new HtmlWebpackPlugin({
+        template: './src/favorites.html',
+        filename: 'favorites.html',
+        inject: false
+    }),
     new CopyPlugin({
       patterns: [
         {

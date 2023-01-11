@@ -11,7 +11,7 @@ export default class ContentClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['getContent', 'createContent', 'clientLoaded', 'getAllContent'];
+        const methodsToBind = ['getContent', 'createContent', 'clientLoaded', 'getAllContent', 'getFavorites'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);
@@ -56,12 +56,20 @@ export default class ContentClient extends BaseClass {
         }
         async getAllContent(errorCallback) {
           try{
-          const response = await this.client.get("/content/all");
+          const response = await this.client.get("/song/all");
           return response.data;
           }catch (error) {
           this.handleError("getAllContent",error,errorCallback)
             }
           }
+          async getFavorites(errorCallback) {
+        try{
+        const response = await this.client.get("/song/favorites");
+        return response.data;
+        }catch (error) {
+        this.handleError("getAllContent",error,errorCallback)
+          }
+        }
 
     /**
      * Helper method to log the error and run any error features in the app.

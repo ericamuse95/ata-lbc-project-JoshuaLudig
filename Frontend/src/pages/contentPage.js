@@ -9,7 +9,7 @@ class ContentPage extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGet', 'onCreate', 'renderContent'], this);
+        this.bindClassMethods(['onGet', 'onCreate', 'renderContent', 'getFavorite','displayAll'], this);
         this.dataStore = new DataStore();
     }
 
@@ -19,6 +19,8 @@ class ContentPage extends BaseClass {
     async mount() {
 
         document.getElementById('create-content-form').addEventListener('submit', this.onCreate);
+        document.getElementById('favorite').addEventListener('click', this.getFavorite);
+        document.getElementById('all').addEventListener('click', this.displayAll);
         this.client = new ContentClient();
 
         this.dataStore.addChangeListener(this.renderContent)
@@ -61,6 +63,39 @@ class ContentPage extends BaseClass {
             this.errorHandler("Error doing GET!  Try again...");
         }
     }
+    async getFavorite(event) {
+            // Prevent the page from refreshing on form submit
+            event.preventDefault();
+            console.log("getFavorite");
+
+           // let id = document.getElementById("id-field").value;
+            this.dataStore.set("content", null);
+
+            let result = await this.client.getFavorites(this.errorHandler);
+            this.dataStore.set("content", result);
+            if (result) {
+                this.showMessage(`Got ${result.name}!`)
+            } else {
+                this.errorHandler("Error doing GET!  Try again...");
+            }
+        }
+        async displayAll(event) {
+                    // Prevent the page from refreshing on form submit
+                    event.preventDefault();
+                    console.log("displayAll");
+
+                   // let id = document.getElementById("id-field").value;
+                    this.dataStore.set("content", null);
+
+                    let result = await this.client.getAllContent(this.errorHandler);
+                    this.dataStore.set("content", result);
+                    if (result) {
+                        this.showMessage(`Got ${result.name}!`)
+                    } else {
+                        this.errorHandler("Error doing GET!  Try again...");
+                    }
+                }
+
 
     // This works do not change!
     async onCreate(event) {
